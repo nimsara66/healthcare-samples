@@ -45,7 +45,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Ballerina Run
-        uses: ballerina-platform/ballerina-action@2201.6.0
+        uses: ballerina-platform/ballerina-action@2201.5.0
         with:
           args: run
         env:
