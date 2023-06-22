@@ -24,10 +24,12 @@ jobs:
       - name: Get subdirectory paths
         id: subdirectories
         run: |
-          subdirs=$(ls -d */)
-          subdirs="[\"${subdirs// /\", \"}\"]"
-          echo "subdirs: $subdirs"
-          echo "{\"subdirectories\": $subdirs}"
+          SUBDIRS=$(ls -d */)
+          SUBDIRS="${SUBDIRS//\/}"
+          SUBDIRS_JSON=$(echo "$SUBDIRS" | jq -R -s -c 'split("\n")[:-1]')
+          echo "$SUBDIRS_JSON"
+          echo "BALLERINA_PROJECT_PATHS=${SUBDIRS_JSON}" >> $GITHUB_OUTPUT
+
 
   # build:
   #   needs: [ setup ]
