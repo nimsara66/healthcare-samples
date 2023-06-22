@@ -24,7 +24,8 @@ jobs:
       - name: Get subdirectory paths
         id: subdirectories
         run: |
-          subdirs=$(find . -type d -depth 1 | sed -e 's,^\./,,')
+          subdirs=$(ls -d */)
+          subdirs="${subdirs//\/}"
           echo "::set-output name=subdirectories::$subdirs"
 
       - name: Run build on each subdirectory
