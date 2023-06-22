@@ -27,6 +27,7 @@ jobs:
           subdirs=$(ls -d */)
           subdirs="[\"${subdirs// /\", \"}\"]"
           echo "subdirs: $subdirs"
+          echo "{\"subdirectories\": $subdirs}"
 
   # build:
   #   needs: [ setup ]
