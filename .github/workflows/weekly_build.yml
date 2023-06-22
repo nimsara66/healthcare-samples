@@ -13,7 +13,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
-      project-matrix: ${{ steps.unique-project-paths.outputs.BALLERINA_PROJECT_PATHS }}
+      project-matrix: ${{ steps.subdirectories.outputs.BALLERINA_PROJECT_PATHS }}
 
     steps:
       - name: Checkout code
