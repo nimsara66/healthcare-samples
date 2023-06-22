@@ -30,7 +30,7 @@ jobs:
     needs: [ setup ]
     runs-on: ubuntu-latest
     env:
-      JAVA_OPTS: -Xmx6G
+      JAVA_OPTS: -Xmx8G
     if: ${{ needs.setup.outputs.project-matrix != '[]' }}
     strategy:
       matrix:
