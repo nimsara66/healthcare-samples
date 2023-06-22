@@ -4,10 +4,6 @@ on:
   schedule:
     - cron:  '30 18 * * 0'    # 00:00 on Sundays in LK time (GMT+5:30)
   workflow_dispatch:
-  
-env:
-  R4_RESOURCE_APIS_PATTERN: r4/resource-apis/*/*
-  R4_PATTERN: r4/*/*
 
 jobs:
   setup:
@@ -34,7 +30,7 @@ jobs:
     needs: [ setup ]
     runs-on: ubuntu-latest
     env:
-      JAVA_OPTS: -Xmx8G
+      JAVA_OPTS: -Xmx6G
     if: ${{ needs.setup.outputs.project-matrix != '[]' && needs.setup.outputs.project-matrix != '' }}
     strategy:
       matrix:
