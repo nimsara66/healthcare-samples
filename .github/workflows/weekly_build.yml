@@ -26,18 +26,8 @@ jobs:
         run: |
           subdirs=$(ls -d */)
           subdirs="${subdirs//\/}"
-
-          # Convert CHANGED_FILES to an array
-          readarray -t CHANGED_FILES_ARRAY <<<"${subdirs}"
-          
-          # Remove duplicates from the CHANGED_FILES_ARRAY
-          for file in "${CHANGED_FILES_ARRAY[@]}"; do
-            echo "subdir: $file"
-
-            if [[ $EXTRACTED_PATH ]]; then
-              UNIQUE_PATHS_MAP[$EXTRACTED_PATH]=1
-            fi
-          done
+          echo "subdirs: $subdirs"
+          echo "{\"subdirectories\": [\"${subdirs// /\",\"}\"]}"
 
   # build:
   #   needs: [ setup ]
