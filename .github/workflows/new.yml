@@ -18,3 +18,15 @@ jobs:
       - name: Testing
         run: |
           ls
+
+      - name: Build and run container
+        env:
+          BALLERINA_VERSION: 2201.6.0
+        run: |
+          docker build --build-arg BALLERINA_VERSION=$BALLERINA_VERSION -t my-ballerina-app .
+          docker run my-ballerina-app
+        working-directory: ${{ steps.checkout.outputs.checkout-path }}
+
+      - name: Execute ls in the container
+        run: |
+          docker run my-ballerina-app ls
