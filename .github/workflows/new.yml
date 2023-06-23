@@ -23,8 +23,10 @@ jobs:
         env:
           BALLERINA_VERSION: 2201.6.0
         run: |
-          docker build --build-arg BALLERINA_VERSION=$BALLERINA_VERSION -t my-ballerina-app .
-          docker run my-ballerina-app
+          docker create --name my-temp-container my-base-image
+          docker cp ${{ steps.checkout.outputs.checkout-path }}/. my-temp-container:/app
+          docker commit my-temp-container my-ballerina-app
+          docker rm my-temp-container
         working-directory: ${{ steps.checkout.outputs.checkout-path }}
 
       - name: Execute ls in the container
