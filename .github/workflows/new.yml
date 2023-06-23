@@ -19,16 +19,24 @@ jobs:
         run: |
           ls
 
-      - name: Build and run container
-        env:
-          BALLERINA_VERSION: 2201.6.0
+      - name: Set up Ballerina
         run: |
-          docker create --name my-temp-container my-base-image
-          docker cp ${{ steps.checkout.outputs.checkout-path }}/. my-temp-container:/app
-          docker commit my-temp-container my-ballerina-app
-          docker rm my-temp-container
-        working-directory: ${{ steps.checkout.outputs.checkout-path }}
+          # Pull the Ballerina Docker image
+          docker pull ballerina/ballerina:2201.6.0
 
-      - name: Execute ls in the container
+      - name: Create entrypoint.sh
         run: |
-          docker run my-ballerina-app ls
+          # Create the entrypoint.sh script to list files in the container
+          echo '#!/bin/sh' > entrypoint.sh
+          echo 'ls -la' >> entrypoint.sh
+          chmod +x entrypoint.sh
+
+      - name: Set DOCKER_API_VERSION environment variable
+        run: |
+          # Set the DOCKER_API_VERSION environment variable
+          echo 'DOCKER_API_VERSION="v1.38"' >> $GITHUB_ENV
+
+      - name: Run Docker container
+        run: |
+          # Run the Docker container with the specified entrypoint
+          docker run --env-file $GITHUB_ENV --user root -v $PWD:/ -w / --entrypoint "/entrypoint.sh" ballerina/ballerina:2201.6.0
