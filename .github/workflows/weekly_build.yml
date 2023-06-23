@@ -48,3 +48,4 @@ jobs:
           WORKING_DIR: ./${{ matrix.path }}
           JAVA_HOME: /usr/lib/jvm/default-jvm
           CMD_LINE_ARGS: -Xmx4G
+          JAVA_OPTS: -Xmx4G
