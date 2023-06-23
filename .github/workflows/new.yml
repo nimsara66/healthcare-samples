@@ -32,7 +32,7 @@ jobs:
 
           # Execute 'ls' command inside the container
           echo "before"
-          docker exec ballerina-container ls
+          docker exec ballerina-container:/app ls
           echo "after"
 
           # Clean up the container
