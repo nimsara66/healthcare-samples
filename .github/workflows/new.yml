@@ -25,14 +25,13 @@ jobs:
           docker pull ballerina/ballerina:2201.6.0
 
           # Run the Docker container
-          docker run -d --name ballerina-container -v $(pwd):/app ballerina/ballerina:2201.6.0 tail -f /dev/null
+          docker run -d --name ballerina-container ballerina/ballerina:2201.6.0 tail -f /dev/null
 
           # Copy everything to the container
-          docker cp . ballerina-container:/app
+          docker cp . ballerina-container
 
           # Execute 'ls' command inside the container
           echo "before"
-          docker ps
           docker exec ballerina-container ls
           echo "after"
 
