@@ -25,7 +25,7 @@ jobs:
           docker pull ballerina/ballerina:2201.6.0
 
           # Run the Docker container
-          docker run -d --name ballerina-container -v $(pwd):/app ballerina/ballerina:2201.6.0
+          docker run -d --name ballerina-container -v $(pwd):/app ballerina/ballerina:2201.6.0 tail -f /dev/null
 
           # Copy everything to the container
           docker cp . ballerina-container:/app
